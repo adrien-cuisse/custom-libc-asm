@@ -7,7 +7,7 @@
 
 extern long string_parse_integer_base_string(char const * const string, char const * const base);
 
-Test(string, parse_base_string_rejects_nulls) {
+Test(string_parse_integer_base_string, rejects_null_strings) {
     int parsedInteger;
 
     parsedInteger = string_parse_integer_base_string(0, "test");
@@ -25,7 +25,7 @@ Test(string, parse_base_string_rejects_nulls) {
     );
 }
 
-Test(string, parse_base_string_hexa_one_digit) {
+Test(string_parse_integer_base_string, single_digit) {
     long parsedInteger = string_parse_integer_base_string("c", HEXA_BASE);
 
     cr_assert_eq(
@@ -35,7 +35,7 @@ Test(string, parse_base_string_hexa_one_digit) {
     );
 }
 
-Test(string, parse_base_string_hexa_several_digits) {
+Test(string_parse_integer_base_string, several_digits) {
     long parsedInteger = string_parse_integer_base_string("c0ff33", HEXA_BASE);
 
     cr_assert_eq(
@@ -45,7 +45,7 @@ Test(string, parse_base_string_hexa_several_digits) {
     );
 }
 
-Test(string, parse_base_string_hexa_only_first_number) {
+Test(string_parse_integer_base_string, only_first_number) {
     long parsedInteger = string_parse_integer_base_string("dead beef", HEXA_BASE);
 
     cr_assert_eq(
