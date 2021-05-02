@@ -53,6 +53,10 @@ clean-objects:
 
 
 ## >>>>>>>>>> LIBRARIES >>>>>>>>>>
+lib-memory: $(LIBS_DIRECTORY)/libmemory.so
+$(LIBS_DIRECTORY)/libmemory.so: $(filter obj/asm/memory/%,$(ASM_OBJECTS))
+	$(CC) $(C_COMMON_FLAGS) -fPIC -shared $^ -o $@
+
 lib-string: $(LIBS_DIRECTORY)/libstring.so
 $(LIBS_DIRECTORY)/libstring.so: $(filter obj/asm/string/%,$(ASM_OBJECTS))
 	$(CC) $(C_COMMON_FLAGS) -fPIC -shared $^ -o $@
@@ -61,7 +65,7 @@ lib-linux64-system: $(LIBS_DIRECTORY)/liblinux64-system.so
 $(LIBS_DIRECTORY)/liblinux64-system.so: $(filter obj/asm/linux64/system/%,$(ASM_OBJECTS))
 	$(CC) -fPIC -shared $^ -o $@
 
-libraries: lib-string lib-linux64-system
+libraries: lib-memory lib-string lib-linux64-system
 
 .PHONY: clean-libraries
 clean-libraries:
