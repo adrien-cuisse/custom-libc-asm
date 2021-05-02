@@ -1,10 +1,10 @@
 
 #include <criterion/criterion.h>
 
-extern char * string_address_of_substring(char * haystack, char const * const needle);
+extern const char * string_address_of_substring(const char * const haystack, char const * const needle);
 
-Test(string, address_of_substring_rejects_null) {
-    char * occurence;
+Test(string_address_of_substring, rejects_null_strings) {
+    const char * occurence;
 
     occurence = string_address_of_substring(0, "foo");
     cr_assert_eq(
@@ -21,10 +21,11 @@ Test(string, address_of_substring_rejects_null) {
     );
 }
 
-Test(string, address_of_substring_null_on_not_found) {
+Test(string_address_of_substring, null_on_not_found) {
     char * haystack = "foo";
     char * needle = "bar";
-    char * occurence = string_address_of_substring(haystack, needle);
+
+    const char * occurence = string_address_of_substring(haystack, needle);
 
     cr_assert_null(
         occurence,
@@ -32,10 +33,11 @@ Test(string, address_of_substring_null_on_not_found) {
     );
 }
 
-Test(string, address_of_substring_not_null_on_character_found) {
+Test(string_address_of_substring, not_null_on_character_found) {
     char * haystack = "foo";
     char * needle = "o";
-    char * occurence = string_address_of_substring(haystack, needle);
+
+    const char * occurence = string_address_of_substring(haystack, needle);
 
     cr_assert_not_null(
         occurence,
@@ -43,10 +45,11 @@ Test(string, address_of_substring_not_null_on_character_found) {
     );
 }
 
-Test(string, address_of_substring_null_on_suite_not_found) {
+Test(string_address_of_substring, null_on_suite_not_found) {
     char * haystack = "folo";
     char * needle = "oo";
-    char * occurence = string_address_of_substring(haystack, needle);
+
+    const char * occurence = string_address_of_substring(haystack, needle);
 
     cr_assert_null(
         occurence,
@@ -54,10 +57,11 @@ Test(string, address_of_substring_null_on_suite_not_found) {
     );
 }
 
-Test(string, address_of_substring_not_null_on_suite_found) {
+Test(string_address_of_substring, not_null_on_suite_found) {
     char * haystack = "assembly";
     char * needle = "semb";
-    char * occurence = string_address_of_substring(haystack, needle);
+
+    const char * occurence = string_address_of_substring(haystack, needle);
 
     cr_assert_not_null(
         occurence,
@@ -65,10 +69,11 @@ Test(string, address_of_substring_not_null_on_suite_found) {
     );
 }
 
-Test(string, address_of_substring_null_on_partial_match) {
+Test(string_address_of_substring, null_on_partial_match) {
     char * haystack = "assembly";
     char * needle = "semp";
-    char * occurence = string_address_of_substring(haystack, needle);
+
+    const char * occurence = string_address_of_substring(haystack, needle);
 
     cr_assert_null(
         occurence,
@@ -76,11 +81,11 @@ Test(string, address_of_substring_null_on_partial_match) {
     );
 }
 
-Test(string, address_of_substring_is_in_haystack) {
+Test(string_address_of_substring, substring_is_in_haystack) {
     char * haystack = "babar";
     char * needle = "aba";
 
-    char * occurence = string_address_of_substring(haystack, needle);
+    const char * occurence = string_address_of_substring(haystack, needle);
 
     cr_assert_geq(
         occurence,
@@ -95,12 +100,12 @@ Test(string, address_of_substring_is_in_haystack) {
     );
 }
 
-Test(string, address_of_substring_first_occurence) {
+Test(string_address_of_substring, first_occurence) {
     char * haystack = "you fool got fooled";
     char * needle = "foo";
     char * expectedSubString = "fool got fooled";
 
-    char * occurence = string_address_of_substring(haystack, needle);
+    const char * occurence = string_address_of_substring(haystack, needle);
 
     // guard since we'll print strings
     cr_assert_not_null(
