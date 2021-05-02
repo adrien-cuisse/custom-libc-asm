@@ -72,7 +72,7 @@ section .text
                 cmp r8, 1
                 je .Lmatching_streak_end
                 ; we weren't on a matching streak (ie., we're at the beginning of the needle), just go further in haystack
-                ;inc rdi
+                inc rdi
                 jmp .Literate_haystack
 
                 .Lmatching_streak_end:
