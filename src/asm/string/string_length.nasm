@@ -23,10 +23,9 @@ section .text
 
         ; loop until null terminating-byte
         .Lstring_length_loop:
-        inc rax
-        cmp byte [rdi + rax], 0
-        je .Lstring_length_end
-        jne .Lstring_length_loop
+            inc rax
+            cmp byte [rdi + rax], 0
+            jne .Lstring_length_loop
 
         .Lstring_length_end:
-        ret
+            ret
