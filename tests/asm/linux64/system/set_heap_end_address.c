@@ -2,9 +2,9 @@
 #include <criterion/criterion.h>
 
 extern void * get_heap_end_address(void);
-extern void * set_heap_end_address(void * heapEndAddress);
+extern void * set_heap_end_address(void const * const heapEndAddress);
 
-Test(memory, set_heap_end_address_increases_heap) {
+Test(linux64_set_heap_end_address, increases_heap) {
     char * oldHeadEndAddress = get_heap_end_address();
     char * newHeadEndAddress = set_heap_end_address(oldHeadEndAddress + 5);
 
@@ -15,7 +15,7 @@ Test(memory, set_heap_end_address_increases_heap) {
     );
 }
 
-Test(memory, set_heap_end_address_increases_heap_by_bytes_count) {
+Test(linux64_set_heap_end_address, increases_heap_by_specified_bytes_count) {
     char * oldHeadEndAddress = get_heap_end_address();
     char * newHeadEndAddress = set_heap_end_address(oldHeadEndAddress + 5);
 
@@ -26,7 +26,7 @@ Test(memory, set_heap_end_address_increases_heap_by_bytes_count) {
     );
 }
 
-Test(memory, set_heap_end_address_leads_to_usable_memory) {
+Test(linux64_set_heap_end_address, leads_to_writable_memory) {
     char * oldHeadEndAddress = get_heap_end_address();
 
     set_heap_end_address(oldHeadEndAddress + 5);
@@ -44,9 +44,9 @@ Test(memory, set_heap_end_address_leads_to_usable_memory) {
     );
 }
 
-Test(memory, set_heap_end_address_has_no_effect_with_invalid_address) {
+Test(linux64_set_heap_end_address, has_no_effect_with_invalid_address) {
     char * oldHeadEndAddress = get_heap_end_address();
-    char * newHeadEndAddress = set_heap_end_address((void *) -1);
+    char * newHeadEndAddress = set_heap_end_address((void *)-1);
 
     cr_assert_eq(
         newHeadEndAddress,
