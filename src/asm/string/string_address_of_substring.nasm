@@ -18,7 +18,7 @@ section .text
 
     string_address_of_substring:
         ; no matching streak starting address
-        mov rax, 0
+        xor rax, rax
 
         ; leave if haystack or needle are null
         cmp rdi, 0
@@ -27,10 +27,10 @@ section .text
         je .Lend
 
         ; position in needle
-        mov rcx, 0
+        xor rcx, rcx
 
         ; we're not on a matching streak
-        mov r8, 0
+        xor r8, r8
 
         .Literate_haystack:
             ; leave loop if end of haystack or needle is reached
@@ -67,7 +67,7 @@ section .text
 
             .Lcharacters_mismatch:
                 ; rewind needle position
-                mov rcx, 0
+                xor rcx, rcx
                 ; check if we were previously on a streak
                 cmp r8, 1
                 je .Lmatching_streak_end
@@ -77,8 +77,8 @@ section .text
 
                 .Lmatching_streak_end:
                     ; end the streak and erase the address where it began
-                    mov r8, 0
-                    mov rax, 0
+                    xor r8, r8
+                    xor rax, rax
                     jmp .Literate_haystack
 
         .Lhaystack_end:
@@ -92,7 +92,7 @@ section .text
             je .Lend
 
         .Lneedle_not_found:
-        mov rax, 0
+        xor rax, rax
 
         .Lend:
         ret

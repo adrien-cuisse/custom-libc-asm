@@ -25,10 +25,10 @@ section .text
         mov rsi, 10
 
         ; we're not on a number
-        mov r8, 0
+        xor r8, r8
 
         ; no negative sign met
-        mov r9, 0
+        xor r9, r9
 
         .Literate_string:
             ; check for string end
@@ -63,7 +63,7 @@ section .text
                     jmp .Lnext_character
 
                 .Lforget_minus:
-                    mov r9, 0
+                    xor r9, r9
                     jmp .Lnext_character
 
             .Lnext_character:
